@@ -1,0 +1,92 @@
+<!--#新增增加信息#-->
+{% extends 'admin.html' %}
+{% block content %}
+<div class="tab-content">
+  <div id="showgengxin" class="tab-pane fade in active">
+    <form method="post" action="/serchyuanshi">
+        <div class="container">
+          <div class="row">
+            <div class="col">
+
+              <button class="btn btn-default" type="button"><a href="/addyuanshi" style="color:black">新增信息</a></button>
+              <input class="search-content" type="text" placeholder="根据物品名搜索内容" name="word" style="margin-left: 700px">
+              <button class="search-btn" type="submit">搜索</button>
+
+            </div>
+
+          </div>
+        </div>
+    </form>
+
+    <table class="table table-bordered table-hover " style="margin:20px auto">
+        <thead>
+            <tr>
+                <th>序号 </th>
+                <th>日期 </th>
+                <th>物品名 </th>
+                <th>数量(Kg) </th>
+                <th>存放位置 </th>
+                <th>操作 </th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for inf in info_yuanshi.items %}
+            <tr>
+                <td>{{ inf.id }} </td>
+                <td>{{ inf.date }} </td>
+                <td>{{ inf.name }} </td>
+                <td>{{ inf.num }} </td>
+                <td>{{ inf.site }} </td>
+                <td>
+                    <div class="btn-group btn-group-xs">
+                        <button class="btn btn-default" type="button"> <a href="/modifyinfoyuanshi?id={{ inf.id }}">修改</a></button>
+                        <button class="btn btn-default" type="button"> <a href="/deleinfoyuanshi?id={{ inf.id }}">删除</a></button>
+
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+      <div class="row">
+
+        <ul class="pagination pull-right" style="margin:5px 20px">
+            <li><a href="/yuanshi/?page=1">首页</a> </li>
+            <!--判断是不是有上一页-->
+            {% if info_yuanshi.has_prev %}
+                <li><a href="/yuanshi/?page={{info_yuanshi.prev_num}}">上一页</a> </li>
+            {% endif %}
+            <!--循环页码生成器-->
+            {% for yuanshis in info_yuanshi.iter_pages(2,0,1,2) %}
+                <!--判断有没有页码-->
+                {% if yuanshis %}
+                    <!--判断是不是等于当前页-->
+                    {% if yuanshis == page %}
+                        <!--当前页高亮，不能点击-->
+                        <li class="active"><a href="#">{{yuanshis}}</a> </li>
+                    {% else %}
+                        <!--其他页可点击-->
+                        <li><a href="/yuanshi/?page={{yuanshis}}">{{yuanshis}}</a> </li>
+                    {% endif %}
+                {% else %}
+                    <!--没有页就显示...-->
+                    <li><a href="#">...</a> </li>
+                {% endif %}
+            {% endfor %}
+            {% if info_yuanshi.has_next %}
+                <!--判断是不是有下一页-->
+                <li><a href="/yuanshi/?page={{info_yuanshi.next_num}}">下一页</a> </li>
+            {% endif %}
+            <!--判断当前页是不是等于总页数-->
+            {% if info_yuanshi.page !=info_yuanshi.pages %}
+                <li><a href="/yuanshi/?page={{info_yuanshi.pages}}">尾页</a> </li>
+            {% endif %}
+
+        </ul>
+        <button class="btn btn-default" type="button"><a href="/download_yuanshi_page?id={{ info_yuanshi.page }}" style="color:green">下载本页</a></button>
+        <button class="btn btn-default" type="button"><a href="/download_yuanshi" style="color:green">下载全部</a></button>
+      </div>
+
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册账号</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+</head>
+<body class="bg">
+<!--这是一个注释，加入背景图片，平铺整个页面-->
+  <style type="text/css">
+    .bg{
+        background-image:url("/static/images/注册.jpg");background-repeat: no-repeat;
+        background-size:100% 200%;
+  </style>
+
+  <form style="width: 400px;margin: 100px auto" method="post">
+    <!--{{msg}}-->
+    <span style="font-size: 20px; color:red">{{msg}}</span>'
+    <!--按钮之间的空隙-->
+    <style>
+      button { margin-right: 30px;}
+    </style>
+    <h2 align="center" style="color:blue">后台注册页面</h2>
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label" style="color:black">用户名:</label>
+      <input type="text"
+             class="form-control"
+             id="exampleInputEmail1"
+             aria-describedby="emailHelp"
+             name = "username"
+      >
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label" style="color:black">密码:</label>
+      <input type="password"
+             class="form-control"
+             id="exampleInputPassword1"
+             name = "password1"
+      >
+    </div>
+
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label" style="color:black">再次输入密码:</label>
+      <input type="password"
+             class="form-control"
+             id="exampleInputPassword2"
+             name = "password2"
+      >
+    </div>
+
+    <button type="submit" class="btn btn-primary" style="width: 150px;margin: 20px 5px">注册</button>
+    <button type="button" class="btn btn-primary" id="login" onclick="window.location.href='../login'" style="width: 150px;margin: 20px 40px">返回主页面</button>
+  </form>
+
+</body>
+</html>

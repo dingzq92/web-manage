@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>出入库记录</title>
+  <!--按钮之间的空隙-->
+    <style>
+      button { margin-right: 30px;}
+    </style>
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+</head>
+<body class="bg">
+<!--这是一个注释，加入背景图片，平铺整个页面-->
+  <style type="text/css">
+    .bg{
+        background-image:url("/static/images/增加2.jpg");background-repeat: no-repeat;
+        background-size:100% 200%;
+  </style>
+
+  <form style="width: 400px;margin: 100px auto" method="post">
+    <!--{{msg}}-->
+    <span style="font-size: 20px; color:red">{{msg}}</span>
+    <!--按钮之间的空隙-->
+    <!--h2居中-->
+    <h2 align="center" style="color:orange">出入库记录页面</h2>
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label" style="color:black">日期:</label>
+      <input type="text"
+             class="form-control"
+             id="exampleInputEmail1"
+             aria-describedby="emailHelp"
+             name = "date"
+      >
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label" style="color:black">物品名:</label>
+      <input type="text"
+             class="form-control"
+             id="name"
+             name = "name"
+      >
+    </div>
+
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label" style="color:black">数量(Kg):</label>
+      <input type="text"
+             class="form-control"
+             id="num"
+             name = "weight"
+      >
+    </div>
+
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label" style="color:black">存放位置:</label>
+      <input type="text"
+             class="form-control"
+             id="site"
+             name = "site"
+      >
+    </div>
+
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label" style="color:black">登记人:</label>
+      <input type="text"
+             class="form-control"
+             id="person"
+             name = "person"
+      >
+    </div>
+
+    <div class="mb-3">
+      <label for="inout" class="form-label" style="color:black">出入库选择:</label>
+      <select class="form-control" name="inout">
+        <option>入库</option>
+        <option>出库</option>
+
+      </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary" style="width: 120px;margin: 20px 5px">提交</button>
+
+
+  </form>
+
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!--#新增增加信息#-->
+{% extends 'admin.html' %}
+{% block content %}
+<div class="tab-content">
+  <div id="showgengxin" class="tab-pane fade in active">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4" style = "width:1200px;margin:10px auto" font-size:100>
+          <button class="btn btn-default" type="button"> <a href="/addyuanshi" style="color:black">新增信息</a></button>
+          <input class="search-content" type="text" placeholder="根据物品名搜索内容" name="word" style="margin-left: 700px">
+          <button class="search-btn" type="submit">搜索</button>
+        </div>
+
+      </div>
+    </div>
+
+    <table class="table table-bordered table-hover " style="margin:20px auto">
+        <thead>
+            <tr>
+                <th>序号 </th>
+                <th>日期 </th>
+                <th>物品名 </th>
+                <th>数量(Kg) </th>
+                <th>存放位置 </th>
+                <th>操作 </th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for inf in yuanshi_query_info) %}
+            <tr>
+                <td>{{ inf.id }} </td>
+                <td>{{ inf.date }} </td>
+                <td>{{ inf.name }} </td>
+                <td>{{ inf.num }} </td>
+                <td>{{ inf.site }} </td>
+                <td>
+                    <div class="btn-group btn-group-xs">
+                        <button class="btn btn-default" type="button"> <a href="/modifyinfoyuanshi?id={{ inf.id }}">修改</a></button>
+                        <button class="btn btn-default" type="button"> <a href="/deleinfoyuanshi?id={{ inf.id }}">删除</a></button>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+  </div>
+</div>
+{% endblock %}

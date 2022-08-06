@@ -1,0 +1,90 @@
+<!--#新增增加信息#-->
+{% extends 'admin.html' %}
+{% block content %}
+<div class="tab-content">
+  <div id="showjilu" class="tab-pane fade in active">
+    <!--#新增增加信息#-->
+    <form method="post" action="/serchjilu">
+        <div class="container" style="width:1200px;margin:10px auto">
+          <div class="row">
+            <div class="col">
+              <button class="btn btn-default" type="button"> <a href="/addjilu" style="color:black">新增信息</a></button>
+              <input class="search-content" type="text" placeholder="根据物品名搜索内容" name="word" style="margin-left: 700px">
+              <button class="search-btn" type="submit">搜索</button>
+            </div>
+          </div>
+        </div>
+    </form>
+    <table class="table table-bordered table-hover " style="margin:20px auto">
+        <thead>
+            <tr>
+                <th>序号 </th>
+                <th>日期 </th>
+                <th>物品名 </th>
+                <th>数量(Kg) </th>
+                <th>存放位置 </th>
+                <th>登记人 </th>
+                <th>出入库 </th>
+                <th>操作 </th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for inf in info_jilu.items %}
+            <tr>
+                <td>{{ inf.id }} </td>
+                <td>{{ inf.date }} </td>
+                <td>{{ inf.name }} </td>
+                <td>{{ inf.num }} </td>
+                <td>{{ inf.site }} </td>
+                <td>{{ inf.people }} </td>
+                <td>{{ inf.in_out }} </td>
+                <td>
+                    <div class="btn-group btn-group-xs">
+                        <button class="btn btn-default" type="button"> <a href="/modifyinfojilu?id={{ inf.id }}">修改</a></button>
+                        <button class="btn btn-default" type="button"> <a href="/deleinfojilu?id={{ inf.id }}">删除</a></button>
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="row">
+
+        <ul class="pagination pull-right" style="margin:5px 20px">
+            <li><a href="/jilu/?page=1">首页</a> </li>
+            <!--判断是不是有上一页-->
+            {% if info_jilu.has_prev %}
+                <li><a href="/jilu/?page={{info_jilu.prev_num}}">上一页</a> </li>
+            {% endif %}
+            <!--循环页码生成器-->
+            {% for jilus in info_jilu.iter_pages(2,0,1,2) %}
+                <!--判断有没有页码-->
+                {% if jilus %}
+                    <!--判断是不是等于当前页-->
+                    {% if jilus == page %}
+                        <!--当前页高亮，不能点击-->
+                        <li class="active"><a href="#">{{jilus}}</a> </li>
+                    {% else %}
+                        <!--其他页可点击-->
+                        <li><a href="/jilu/?page={{jilus}}">{{jilus}}</a> </li>
+                    {% endif %}
+                {% else %}
+                    <!--没有页就显示...-->
+                    <li><a href="#">...</a> </li>
+                {% endif %}
+            {% endfor %}
+            {% if info_jilu.has_next %}
+                <!--判断是不是有下一页-->
+                <li><a href="/jilu/?page={{info_jilu.next_num}}">下一页</a> </li>
+            {% endif %}
+            <!--判断当前页是不是等于总页数-->
+            {% if info_jilu.page !=info_jilu.pages %}
+                <li><a href="/jilu/?page={{info_jilu.pages}}">尾页</a> </li>
+            {% endif %}
+        </ul>
+        <button class="btn btn-default" type="button"><a href="/download_jilu_page?id={{ info_jilu.page }}" style="color:green">下载本页</a></button>
+        <button class="btn btn-default" type="button"><a href="/download_jilu" style="color:green">下载全部</a></button>
+    </div>
+   </div>
+</div>
+{% endblock %}
